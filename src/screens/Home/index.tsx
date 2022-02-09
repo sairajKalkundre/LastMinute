@@ -10,9 +10,12 @@
 
 import React from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-import HotelCard from './src/components/HotelCard';
+import {useGetHotelByNameQuery} from '../../services/hotelApiSlice';
+import HotelCard from '../../components/HotelCard';
 
-const App = () => {
+const Home = () => {
+  const {data, error, isLoading} = useGetHotelByNameQuery();
+  console.log({data});
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <StatusBar barStyle={'light-content'} />
@@ -30,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;

@@ -1,5 +1,6 @@
 import {Image, Text, View} from 'react-native';
 import React from 'react';
+// @ts-ignore
 import StarRating from 'react-native-star-rating';
 import styling from './hotelcard.style';
 
