@@ -2,7 +2,7 @@ export interface Hotel {
   id: number;
   name: string;
   location: Location;
-  starts: number;
+  stars: number;
   checkIn: Check;
   checkOut: Check;
   contact: Contact;

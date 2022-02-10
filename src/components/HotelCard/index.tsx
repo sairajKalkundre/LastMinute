@@ -4,29 +4,36 @@ import React from 'react';
 import StarRating from 'react-native-star-rating';
 import styling from './hotelcard.style';
 
-const HotelCard = () => {
+interface HotelCardProps {
+  name: string | undefined;
+  stars: number | undefined;
+  price: number | undefined;
+  gallery: Array<string>;
+}
+
+const HotelCard = ({name, stars, price, gallery}: HotelCardProps) => {
   return (
     <View style={styling.containerStyle}>
       <Image
         source={{
-          uri: 'https://res.cloudinary.com/lastminute/image/upload/q_auto/v1609194083/n88jigk27jtmvekqunbv.jpg',
+          uri: gallery[0],
         }}
         style={styling.imageStyle}
         resizeMode="cover"
       />
       <View style={styling.childContainerStyle}>
-        <Text style={styling.hotelNameTextStyle}>Sahid Montana, Malang</Text>
+        <Text style={styling.hotelNameTextStyle}>{name}</Text>
         <StarRating
           disabled={false}
           maxStars={5}
-          rating={3.5}
+          rating={stars}
           starSize={15}
           containerStyle={styling.starContainerStyle}
           fullStarColor={'orange'}
           emptyStarColor={'grey'}
         />
         <View style={{flexDirection: 'row'}}>
-          <Text style={styling.priceTextStyle}>$26.77</Text>
+          <Text style={styling.priceTextStyle}>{price}</Text>
           <Text style={styling.nightTextStyle}>/ night</Text>
         </View>
       </View>

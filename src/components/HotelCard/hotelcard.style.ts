@@ -17,7 +17,7 @@ interface HotelcardStyle {
 }
 
 export default StyleSheet.create<HotelcardStyle>({
-  containerStyle: {height: 250},
+  containerStyle: {height: 250, margin: 5},
   imageStyle: {
     height: 250,
     width: Dimensions.get('screen').width / 2 - 20,
