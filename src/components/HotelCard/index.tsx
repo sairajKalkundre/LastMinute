@@ -33,7 +33,7 @@ const HotelCard = ({name, stars, price, gallery}: HotelCardProps) => {
           emptyStarColor={'grey'}
         />
         <View style={{flexDirection: 'row'}}>
-          <Text style={styling.priceTextStyle}>{price}</Text>
+          <Text style={styling.priceTextStyle}>€ {price}</Text>
           <Text style={styling.nightTextStyle}>/ night</Text>
         </View>
       </View>
