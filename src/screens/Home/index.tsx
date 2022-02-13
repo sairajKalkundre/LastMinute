@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {useCallback, useMemo, useRef} from 'react';
+import React, {useMemo, useRef} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -25,6 +25,8 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {colors} from '../../utils/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
+import {Hotel} from '../../types/hotel';
 
 const styles = StyleSheet.create({
   backgroundStyle: {
@@ -40,17 +42,18 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   const {data, error, isLoading} = useGetHotelByNameQuery();
-
+  const navigation = useNavigation();
   const bottomSheetRef = useRef<BottomSheet>(null);
   // variables
 
   const snapPoints = useMemo(() => ['25%', '40%'], []);
   // callbacks
 
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-    bottomSheetRef.current.close();
-  }, []);
+  const navigateToDetails = (item: Hotel) => {
+    navigation.navigate('Details', {
+      item: item,
+    });
+  };
 
   const dummyArr = [];
 
@@ -75,6 +78,7 @@ const Home = () => {
             price={item?.price}
             stars={item?.stars}
             gallery={item?.gallery}
+            navigate={() => navigateToDetails(item)}
           />
         )}
         ListEmptyComponent={() => (

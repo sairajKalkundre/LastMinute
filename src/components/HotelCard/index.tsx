@@ -3,17 +3,20 @@ import React from 'react';
 // @ts-ignore
 import StarRating from 'react-native-star-rating';
 import styling from './hotelcard.style';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Hotel} from '../../types/hotel';
 
 interface HotelCardProps {
   name: string | undefined;
   stars: number | undefined;
   price: number | undefined;
   gallery: Array<string>;
+  navigate: (item: Hotel) => void;
 }
 
-const HotelCard = ({name, stars, price, gallery}: HotelCardProps) => {
+const HotelCard = ({name, stars, price, gallery, navigate}: HotelCardProps) => {
   return (
-    <View style={styling.containerStyle}>
+    <TouchableOpacity style={styling.containerStyle} onPress={navigate}>
       <Image
         source={{
           uri: gallery[0],
@@ -37,7 +40,7 @@ const HotelCard = ({name, stars, price, gallery}: HotelCardProps) => {
           <Text style={styling.nightTextStyle}>/ night</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
