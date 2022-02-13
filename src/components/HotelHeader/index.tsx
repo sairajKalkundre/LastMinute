@@ -5,7 +5,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import styling from './hotelheader.styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const HotelHeader = ({openFilter}) => {
+interface HotelHeaderProps {
+  openFilter: () => void;
+}
+
+const HotelHeader = ({openFilter}: HotelHeaderProps) => {
   return (
     <View>
       <MaterialCommunityIcons

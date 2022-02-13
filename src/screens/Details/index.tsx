@@ -6,11 +6,14 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ScrollView} from 'react-native-gesture-handler';
+import {colors} from '../../utils/colors';
+import {useNavigation} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   absoluteContainer: {
@@ -45,6 +48,7 @@ const styles = StyleSheet.create({
 const Details = ({route}) => {
   const {item} = route.params;
   console.log(item);
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle={'dark-content'} />
@@ -54,6 +58,23 @@ const Details = ({route}) => {
           style={{height: '100%', margin: 10, borderRadius: 10}}
           resizeMode={'cover'}
         />
+
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{
+            position: 'absolute',
+            top: 0,
+            height: 40,
+            width: 40,
+            marginTop: 20,
+            marginLeft: 20,
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.transparentWhiteBackground,
+          }}>
+          <MaterialCommunityIcons name="arrow-left" color={'black'} size={20} />
+        </TouchableOpacity>
         <View style={styles.absoluteContainer}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text
@@ -100,6 +121,7 @@ const Details = ({route}) => {
             />
           </View>
         </View>
+        <View />
       </View>
       <View style={{flex: 1}}>
         <ScrollView style={{marginTop: 20}}>

@@ -38,6 +38,7 @@ export default StyleSheet.create<HotelheaderStylesProp>({
     width: 35,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 2,
   },
   searchTextStyle: {
     backgroundColor: colors.lightGrey,

@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {useMemo, useRef} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -19,7 +19,6 @@ import {
   View,
 } from 'react-native';
 import {useGetHotelByNameQuery} from '../../services/hotelApiSlice';
-import HotelCard from '../../components/HotelCard';
 import HotelHeader from '../../components/HotelHeader';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -27,6 +26,7 @@ import {colors} from '../../utils/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {Hotel} from '../../types/hotel';
+import HotelCard from '../../components/HotelCard';
 
 const styles = StyleSheet.create({
   backgroundStyle: {
@@ -41,36 +41,59 @@ const styles = StyleSheet.create({
 });
 
 const Home = () => {
-  const {data, error, isLoading} = useGetHotelByNameQuery();
+  // @ts-ignore
+  const {data, isLoading} = useGetHotelByNameQuery<Hotel[]>();
+
+  const [hotelData, setHotelData] = useState<Hotel[]>([]);
+
+  useMemo(() => {
+    setHotelData(data);
+  }, [data]);
+
   const navigation = useNavigation();
   const bottomSheetRef = useRef<BottomSheet>(null);
   // variables
 
-  const snapPoints = useMemo(() => ['25%', '40%'], []);
+  const snapPoints = useMemo(() => ['10%', '30%'], []);
   // callbacks
 
   const navigateToDetails = (item: Hotel) => {
+    // @ts-ignore
     navigation.navigate('Details', {
       item: item,
     });
   };
 
-  const dummyArr = [];
-
   const openBottom = () => {
+    // @ts-ignore
     bottomSheetRef.current.expand();
   };
 
-  const closeBottom = () => {
+  const sortLowToHigh = () => {
+    let newArr = hotelData.slice().sort((a, b) => {
+      return a?.price - b?.price;
+    });
+    setHotelData(newArr);
+    // @ts-ignore
     bottomSheetRef.current.close();
   };
+
+  const sortHighToLow = () => {
+    let newArr = hotelData.slice().sort((a, b) => {
+      return b?.price - a?.price;
+    });
+    setHotelData(newArr);
+    // @ts-ignore
+    bottomSheetRef.current.close();
+  };
+
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <StatusBar barStyle={'light-content'} />
       <HotelHeader openFilter={openBottom} />
       <FlatList
         // @ts-ignore
-        data={data}
+        data={hotelData}
         style={{marginTop: 10}}
         renderItem={({item}) => (
           <HotelCard
@@ -100,7 +123,7 @@ const Home = () => {
 
       <BottomSheet
         ref={bottomSheetRef}
-        index={1}
+        index={-1}
         snapPoints={snapPoints}
         backgroundStyle={{backgroundColor: '#000'}}
         enablePanDownToClose={true}>
@@ -128,6 +151,7 @@ const Home = () => {
 
           <View style={{marginTop: 20}}>
             <TouchableOpacity
+              onPress={() => sortLowToHigh()}
               style={{
                 height: 50,
                 marginRight: 20,
@@ -156,6 +180,7 @@ const Home = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => sortHighToLow()}
               style={{
                 height: 50,
                 borderRadius: 20,
@@ -179,64 +204,6 @@ const Home = () => {
                 High to Low
               </Text>
             </TouchableOpacity>
-          </View>
-
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: 20,
-              height: 60,
-              justifyContent: 'space-between',
-              flex: 1,
-            }}>
-            <View
-              style={{
-                height: 50,
-                borderWidth: StyleSheet.hairlineWidth,
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: 20,
-                flex: 1,
-                borderRadius: 5,
-                borderColor: 'white',
-              }}>
-              <TouchableOpacity onPress={closeBottom}>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    color: colors.lightGrey,
-                    fontSize: 18,
-                  }}>
-                  Cancel
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                height: 50,
-                borderWidth: StyleSheet.hairlineWidth,
-                justifyContent: 'center',
-                alignItems: 'center',
-                right: 0,
-                marginLeft: 20,
-                borderColor: 'white',
-                backgroundColor: 'white',
-                flexDirection: 'row',
-                marginRight: 20,
-                flex: 1,
-                borderRadius: 5,
-              }}>
-              <TouchableOpacity>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    color: '#000',
-                    fontSize: 20,
-                  }}>
-                  Apply
-                </Text>
-              </TouchableOpacity>
-            </View>
           </View>
         </View>
       </BottomSheet>
