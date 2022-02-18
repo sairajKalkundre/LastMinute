@@ -4,6 +4,7 @@ import {Text, TextInput, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styling from './hotelheader.styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Strings} from '../../utils/strings';
 
 interface HotelHeaderProps {
   openFilter: () => void;
@@ -18,13 +19,11 @@ const HotelHeader = ({openFilter}: HotelHeaderProps) => {
         size={20}
         style={{alignSelf: 'flex-end', marginRight: 20}}
       />
-      <Text style={styling.headerTextStyle}>
-        Search for your favorite hotel
-      </Text>
+      <Text style={styling.headerTextStyle}>{Strings.searchFavorite}</Text>
       <View style={styling.searchContainer}>
         <TextInput
           style={styling.searchTextStyle}
-          placeholder={'Search a hotel'}
+          placeholder={Strings.search}
           placeholderTextColor={'grey'}
         />
         <View style={styling.searchIconContainer}>

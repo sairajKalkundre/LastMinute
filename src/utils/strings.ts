@@ -1,0 +1,16 @@
+export enum Strings {
+  search = 'Search a hotel',
+  searchFavorite = 'Search for your favorite hotel',
+  perNight = '/ night',
+  sortBy = 'Sort By',
+  priceSort = '€ Price',
+  ltoH = 'Low to High',
+  htoL = 'High to Low',
+  gallery = 'Gallery',
+  rules = 'Rules',
+  address = 'Address',
+  contact = 'Contact',
+  userRating = ' ✦ User Rating :',
+  checkIn = ' Check-in :',
+  checkOut = ' Check out : ',
+}

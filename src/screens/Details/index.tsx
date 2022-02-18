@@ -14,6 +14,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {ScrollView} from 'react-native-gesture-handler';
 import {colors} from '../../utils/colors';
 import {useNavigation} from '@react-navigation/native';
+import {Strings} from '../../utils/strings';
 
 const styles = StyleSheet.create({
   absoluteContainer: {
@@ -88,7 +89,7 @@ const Details = ({route}) => {
             </Text>
             <View style={{flexDirection: 'row', marginRight: 10}}>
               <Text style={styles.priceTextStyle}>€ {item?.price}</Text>
-              <Text style={styles.nightTextStyle}>/ night</Text>
+              <Text style={styles.nightTextStyle}>{Strings.perNight}</Text>
             </View>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -132,7 +133,7 @@ const Details = ({route}) => {
               marginTop: 20,
               marginLeft: 19,
             }}>
-            Gallery
+            {Strings.gallery}
           </Text>
           <FlatList
             horizontal={true}
@@ -157,7 +158,7 @@ const Details = ({route}) => {
               marginTop: 20,
               marginLeft: 19,
             }}>
-            Rules
+            {Strings.rules}
           </Text>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <MaterialCommunityIcons
@@ -173,7 +174,7 @@ const Details = ({route}) => {
                 marginLeft: 5,
                 color: 'grey',
               }}>
-              Check-in : {item?.checkIn?.from} / {item?.checkIn?.to}
+              {Strings.checkIn} {item?.checkIn?.from} / {item?.checkIn?.to}
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginTop: 10}}>
@@ -190,7 +191,7 @@ const Details = ({route}) => {
                 marginLeft: 5,
                 color: 'grey',
               }}>
-              Check out : {item?.checkOut?.from} / {item?.checkOut?.to}
+              {Strings.checkOut} {item?.checkOut?.from} / {item?.checkOut?.to}
             </Text>
           </View>
           <Text
@@ -200,7 +201,7 @@ const Details = ({route}) => {
               marginTop: 20,
               marginLeft: 19,
             }}>
-            Address
+            {Strings.address}
           </Text>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <MaterialCommunityIcons
@@ -226,7 +227,7 @@ const Details = ({route}) => {
               marginTop: 20,
               marginLeft: 19,
             }}>
-            Contact
+            {Strings.contact}
           </Text>
           <View
             style={{
@@ -299,7 +300,7 @@ const Details = ({route}) => {
                 fontWeight: '500',
                 marginTop: 20,
               }}>
-              ✦ User Rating :
+              {Strings.userRating}
             </Text>
             <Text
               style={{

@@ -27,6 +27,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useNavigation} from '@react-navigation/native';
 import {Hotel} from '../../types/hotel';
 import HotelCard from '../../components/HotelCard';
+import {Strings} from '../../utils/strings';
 
 const styles = StyleSheet.create({
   backgroundStyle: {
@@ -135,7 +136,7 @@ const Home = () => {
               marginLeft: 20,
               color: 'white',
             }}>
-            Sort By
+            {Strings.sortBy}
           </Text>
 
           <Text
@@ -146,7 +147,7 @@ const Home = () => {
               marginLeft: 20,
               marginTop: 10,
             }}>
-            € Price
+            {Strings.priceSort}
           </Text>
 
           <View style={{marginTop: 20}}>
@@ -176,7 +177,7 @@ const Home = () => {
                   color: colors.lightGrey,
                   fontSize: 18,
                 }}>
-                Low to High
+                {Strings.ltoH}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -201,7 +202,7 @@ const Home = () => {
                 style={{marginRight: 10}}
               />
               <Text style={{fontWeight: '600', color: 'white', fontSize: 18}}>
-                High to Low
+                {Strings.htoL}
               </Text>
             </TouchableOpacity>
           </View>

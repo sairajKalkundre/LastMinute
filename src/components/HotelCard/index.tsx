@@ -5,6 +5,7 @@ import StarRating from 'react-native-star-rating';
 import styling from './hotelcard.style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Hotel} from '../../types/hotel';
+import {Strings} from '../../utils/strings';
 
 interface HotelCardProps {
   name: string | undefined;
@@ -37,7 +38,7 @@ const HotelCard = ({name, stars, price, gallery, navigate}: HotelCardProps) => {
         />
         <View style={{flexDirection: 'row'}}>
           <Text style={styling.priceTextStyle}>€ {price}</Text>
-          <Text style={styling.nightTextStyle}>/ night</Text>
+          <Text style={styling.nightTextStyle}>{Strings.perNight}</Text>
         </View>
       </View>
     </TouchableOpacity>
